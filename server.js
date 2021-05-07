@@ -23,6 +23,17 @@ app.get(`/greetings/:name`, (req, res) => {
 });
 
 /**
+ * Greeting when no name specified.
+ */
+app.get(`/greetings`, (req, res) => {
+  try {
+    return res.send(`Hello, Stranger!`);
+  } catch (err) {
+    return res.sendStatus(404);
+  }
+});
+
+/**
  * Handles malformed URL cases.
  */
 app.use(function (req, res, next) {
