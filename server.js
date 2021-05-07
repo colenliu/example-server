@@ -10,7 +10,6 @@ app.get(`/greetings/:name`, (req, res) => {
     const name = req.params.name;
 
     if (!name.match(/^[a-z0-9]+$/i)) {
-      // console.log("BAD");
       return res.json({
         message: "Please try again with an alphanumeric name.",
       });
