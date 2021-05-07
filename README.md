@@ -13,4 +13,4 @@ node server.js
 ```
 3. Navigate to `localhost:3000/greetings/<name>` on a browser and observe the greeting screen
 
-##### (check email for link to deployed `example-server`)
+##### (check email for public URL to AWS-deployed `example-server`)
