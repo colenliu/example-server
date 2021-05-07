@@ -10,8 +10,9 @@ app.get(`/greetings/:name`, (req, res) => {
     const name = req.params.name;
 
     if (!name.match(/^[a-z0-9]+$/i)) {
-      return res.json({
-        message: "Please try again with an alphanumeric name.",
+      return res.status(400).json({
+        statusCode: 400,
+        error: "Please try again with an alphanumeric name.",
       });
     }
 
@@ -32,8 +33,18 @@ app.get(`/greetings`, (req, res) => {
   }
 });
 
+// Handles non-accepted characters in the URL.
+app.use((err, req, res, next) => {
+  if (!err) return next();
+
+  return res.status(400).json({
+    statusCode: 400,
+    error: "Please try again with an alphanumeric name.",
+  });
+});
+
 /**
- * Handles malformed URL cases.
+ * Handles incorrectly formatted URLs.
  */
 app.use(function (req, res, next) {
   try {
