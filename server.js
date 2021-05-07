@@ -2,9 +2,44 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
+/**
+ * Greeting when name specified.
+ */
 app.get(`/greetings/:name`, (req, res) => {
-  const name = req.params.name;
-  res.send(`Hello, ${name}!`);
+  try {
+    const name = req.params.name;
+
+    if (!name.match(/^[a-z0-9]+$/i)) {
+      // console.log("BAD");
+      return res.json({
+        message: "Please try again with an alphanumeric name.",
+      });
+    }
+
+    return res.send(`Hello, ${name}!`);
+  } catch (err) {
+    return res.sendStatus(404);
+  }
+});
+
+/**
+ * Handles malformed URL cases.
+ */
+app.use(function (req, res, next) {
+  try {
+    res.status(400);
+
+    // respond with json
+    if (req.accepts("json")) {
+      res.json({
+        statusCode: 400,
+        error: "Please check that the URL is formed corrctly.",
+      });
+      return;
+    }
+  } catch (err) {
+    return res.sendStatus(404);
+  }
 });
 
 app.listen(port, () => {
