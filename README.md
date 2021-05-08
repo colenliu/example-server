@@ -2,6 +2,7 @@
 A bare-bones example Express.js server that greets users with a simple message.
 
 ### How to Run Locally:
+(Note: `Node.js` and `npm` must be installed for following code to work)
 1. In the project root directory, input the followning command on a terminal:
 ```
 npm install
